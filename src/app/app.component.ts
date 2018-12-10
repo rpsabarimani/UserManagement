@@ -16,7 +16,7 @@ export class AppComponent {
   users = [];
   totalCount = 0;
   ngOnInit() {
-    this.http.get(USER_API).subscribe(data => this.sendToUI(data[0]));
+    this.http.get(USER_API).subscribe(data => this.sendToUI(data));
   }
   sendToUI(data) {
     this.totalCount = data.results.length;
