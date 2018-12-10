@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { HttpClient } from "@angular/common/http";
+import { USER_API } from "./constants";
 
 @Component({
   selector: "app-root",
@@ -9,18 +10,18 @@ import { HttpClient } from "@angular/common/http";
 })
 export class AppComponent {
   constructor(private titleService: Title, private http: HttpClient) {
-    this.titleService.setTitle("Onboarding Dashboard");
+    this.titleService.setTitle("User Management");
   }
-  title = "Onboarding Dashboard";
+  title = "User Management";
   users = [];
+  totalCount = 0;
   ngOnInit() {
-    this.http
-      .get("http://127.0.0.1:3000/users")
-      .subscribe(data => this.sendToUI(data[0]));
+    this.http.get(USER_API).subscribe(data => this.sendToUI(data[0]));
   }
   sendToUI(data) {
+    this.totalCount = data.results.length;
     console.log(data);
-    console.log(data.results);
+    console.log(data.results.length);
     this.users = data.results;
   }
 }
