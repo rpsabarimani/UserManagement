@@ -1,0 +1,30 @@
+* {
+  font-family: openL;
+}
+
+@font-face {
+  font-family: openR;
+  src: url("../fonts/OpenSans-Regular.ttf");
+}
+@font-face {
+  font-family: openL;
+  src: url("../fonts/OpenSans-Light.ttf");
+}
+@font-face {
+  font-family: openB;
+  src: url("../fonts/OpenSans-Bold.ttf");
+}
+.bformHead {
+  width: auto;
+  height: auto;
+  line-height: 30px;
+  letter-spacing: -0.05em;
+  font-size: 22px;
+  text-align: left;
+  color: #333;
+  border-left: 10px solid #e66006;
+  padding-left: 15px;
+}
+.page-title {
+  padding: 20px;
+}
