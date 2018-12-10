@@ -1,7 +1,3 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
 <app-header></app-header>
 <div class="container-fluid page-title">
   <div class="row">
@@ -34,8 +30,8 @@
               <td>{{ user.lastName }}</td>
               <td>{{ user.email }}</td>
               <td>
-                  <span class="edit glyphicon glyphicon-edit" aria-hidden="true" (click) ="onEdit()"></span>
-                  <span class="delete glyphicon glyphicon-trash" aria-hidden="true"></span>
+                  <span><button type="button" class="btn btn-secondary" (click) ="onEdit()">Edit</button></span>  
+                  <span><button type="button" class="btn btn-danger" (click)="onDelete()">Delete</button></span>
              </td>
             </tr>
           </tbody>

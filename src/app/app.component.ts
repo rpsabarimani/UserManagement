@@ -25,7 +25,9 @@ export class AppComponent {
     this.users = data.results;
   }
   onEdit(){
-    var edit = "Action performed on Edit Button";
      alert("Click to Edit");
    }
+   onDelete(){
+    alert("Deleted Successfully");
+  }
 }
