@@ -24,9 +24,11 @@ export class AppComponent {
     console.log(data.results.length);
     this.users = data.results;
   }
+
   onEdit(){
      alert("Click to Edit");
    }
+   
    onDelete(){
     alert("Deleted Successfully");
   }
