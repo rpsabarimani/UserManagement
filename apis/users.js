@@ -88,6 +88,7 @@ router.post("/", function(req, res) {
     errMsg = validate.errMsg;
     error = { errCode: errCode, errMsg: errMsg };
     results = { results: [], error: error };
+    console.log(results);
     res.json(results);
   } else {
     var id = req.body.id,
@@ -125,6 +126,7 @@ router.post("/", function(req, res) {
 
         error = { errCode: errCode, errMsg: errMsg };
         results = { results: rows, error: error };
+        console.log(results);
         res.json(results);
       }
     );

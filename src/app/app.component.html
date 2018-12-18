@@ -2,10 +2,16 @@
 <div class="container-fluid page-title">
   <div class="row">
     <div class="col-md-6">
-      <div class="bformHead fLeft fmOpenL" id="postIndentHeader">
+      <div class="bformHead fmOpenL" id="postIndentHeader">
         {{ title }} ({{ totalCount }})
       </div>
     </div>
+    <div class="col-md-6">
+      <button class="btn btn-info float-right" (click)="addUser(content)">
+        Add User
+      </button>
+    </div>
+    <div class="clearfix"></div>
   </div>
 </div>
 
@@ -32,8 +38,24 @@
               <td>{{ user.email }}</td>
               <td>{{ user.mobile }}</td>
               <td>
-                  <span><button type="button" class="btn btn-secondary" (click) ="onEdit()">Edit</button></span>  
-                  <span><button type="button" class="btn btn-danger" (click)="onDelete()">Delete</button></span>
+                <span
+                  ><button
+                    type="button"
+                    class="btn btn-secondary"
+                    (click)="onEdit(user.id, content)"
+                  >
+                    Edit
+                  </button></span
+                >
+                <span
+                  ><button
+                    type="button"
+                    class="btn btn-danger"
+                    (click)="onDelete()"
+                  >
+                    Delete
+                  </button></span
+                >
               </td>
             </tr>
           </tbody>
@@ -41,6 +63,85 @@
       </div>
     </div>
   </div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{ modelTitle }}</h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss()"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form #userForm="ngForm" (ngSubmit)="addEditUserAction(userForm.value)">
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <div class="input-group">
+            <input
+              id="firstName"
+              class="form-control"
+              placeholder="Ex, Sabari"
+              name="firstName"
+              [(ngModel)]="userData.firstName"
+            />
+            <input
+              id="id"
+              class="form-control"
+              name="id"
+              type="hidden"
+              [(ngModel)]="userData.id"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <div class="input-group">
+            <input
+              id="lastName"
+              class="form-control"
+              placeholder="Ex, Manikandan"
+              name="lastName"
+              [(ngModel)]="userData.lastName"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <div class="input-group">
+            <input
+              id="email"
+              class="form-control"
+              placeholder="Ex, demo@sabarimani.com"
+              name="email"
+              [(ngModel)]="userData.email"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="mobile">Mobile</label>
+          <div class="input-group">
+            <input
+              id="mobile"
+              class="form-control"
+              placeholder="Ex, 9655338337"
+              name="mobile"
+              [(ngModel)]="userData.mobile"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modal.close()">
+          Close
+        </button>
+        <input type="submit" class="btn btn-success" value="Save" />
+      </div>
+    </form>
+  </ng-template>
 
   <footer></footer>
 </div>
