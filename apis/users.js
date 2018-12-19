@@ -123,9 +123,10 @@ router.post("/", function(req, res) {
         } else {
           (errCode = 0), (errMsg = "Data updated Successfully");
         }
-
+        results = req.body;
+        results.id = rows.insertId;
         error = { errCode: errCode, errMsg: errMsg };
-        results = { results: rows, error: error };
+        results = { results: results, error: error };
         console.log(results);
         res.json(results);
       }

@@ -41,19 +41,10 @@ export class AppComponent {
   sendToForm(data, content) {
     let errCode = data.error.errCode;
     if (errCode == 0) {
-      this.formdata = new FormGroup({
-        email: new FormControl("angular@gmail.com"),
-        mobile: new FormControl("abcd1234")
-      });
       this.modelTitle = "Edit User";
       this.userData = data.results[0];
-      console.log(this.userData);
       this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });
     }
-  }
-
-  onDelete() {
-    alert("Deleted Successfully");
   }
 
   modelTitle: string;
@@ -77,12 +68,59 @@ export class AppComponent {
 
   addEditUserAction(data) {
     console.log(data);
-    var newUserObj = [];
-    this.users.forEach(function(vl) {
-      if (vl.id === data.id) newUserObj.push(data);
-      else newUserObj.push(vl);
+
+    this.http
+      .post(USER_API, data)
+      .subscribe(resultData => this.addEditUserCallback(resultData));
+  }
+
+  addEditUserCallback(resultData) {
+    console.log(resultData);
+    let errCode = resultData.error.errCode,
+      errMsg = resultData.error.errMsg;
+    if (errCode === 0) {
+      let data = resultData.results;
+      if (this.users.find(v => v.id == data.id)) {
+        var newUserObj = [];
+        this.users.forEach(function(vl) {
+          if (vl.id === data.id) newUserObj.push(data);
+          else newUserObj.push(vl);
+        });
+        this.users = newUserObj;
+      } else {
+        this.users.push(data);
+      }
+      alert(errMsg);
+      this.modalService.dismissAll();
+    } else {
+      alert(errMsg);
+    }
+  }
+
+  deleteUserId = "";
+  onDelete(id, deleteConfirmModel) {
+    this.deleteUserId = id;
+    this.modalService.open(deleteConfirmModel, {
+      ariaLabelledBy: "modal-basic-title"
     });
-    this.users = newUserObj;
+  }
+
+  deleteUser() {
+    this.http
+      .delete(USER_API + "/" + this.deleteUserId)
+      .subscribe(data => this.deleteUserCallback(data));
+  }
+
+  deleteUserCallback(data) {
+    var errCode = data.error.errCode,
+      errMsg = data.error.errMsg;
+    alert(errMsg);
+    if (errCode === 0) {
+      this.users.forEach((val, index) => {
+        if (this.deleteUserId == val.id) this.users.splice(index, 1);
+      });
+    }
+    this.deleteUserId = "";
     this.modalService.dismissAll();
   }
 }

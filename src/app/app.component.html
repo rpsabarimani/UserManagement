@@ -51,7 +51,7 @@
                   ><button
                     type="button"
                     class="btn btn-danger"
-                    (click)="onDelete()"
+                    (click)="onDelete(user.id, deleteConfirmModel)"
                   >
                     Delete
                   </button></span
@@ -141,6 +141,18 @@
         <input type="submit" class="btn btn-success" value="Save" />
       </div>
     </form>
+  </ng-template>
+
+  <ng-template #deleteConfirmModel let-modal>
+    <div class="modal-body">Are you sure do you want to Delete the User?</div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal.close()">
+        No
+      </button>
+      <button type="button" class="btn btn-success" (click)="deleteUser()">
+        Yes
+      </button>
+    </div>
   </ng-template>
 
   <footer></footer>
